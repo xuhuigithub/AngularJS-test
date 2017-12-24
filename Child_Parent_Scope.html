@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/angular/1.2.13/angular.js"></script>
+</head>
+<body>
+    <div ng-app="app">
+        <div ng-controller="ParentController">
+            <div ng-controller="ChildController">
+                <a ng-click="sayHello()" href="#">Say hello</a>
+            </div>
+            {{ person }}
+        </div>
+    </div>
+</body>
+<script>
+    var app = angular.module("app",[]);
+    app.controller('ParentController',function ($scope) {
+        $scope.person = {greeted: false};
+    });
+    app.controller('ChildController',function ($scope) {
+       $scope.sayHello = function () {
+           $scope.person.name = "Xuhui";
+//           可以继承并修改父作用域的对象
+       };
+    });
+</script>
+</html>
