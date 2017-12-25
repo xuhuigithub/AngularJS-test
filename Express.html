@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表达式</title>
+    <script src="js/angular/1.2.13/angular.js"></script>
+</head>
+<body>
+    <div ng-app="myApp">
+        <div ng-controller="MyController">
+            <input ng-model="expr" type="text" placeholder="Enter an expression"/>
+            <h2>{{ parseValue }}</h2>
+        </div>
+    </div>
+</body>
+<script>
+    function debug(topic,msg) {
+        console.log( topic +" "+ msg)
+    }
+    var app = angular.module("myApp",[]);
+    app.controller('MyController',function ($scope,$parse) {
+        $scope.ss = 'sss';
+        $scope.$watch('expr',function(newVal,oldVal,scope){
+//            传入三个参数 新值 旧值 和 作用域(修改数据用的(猜的))
+            if (newVal !== oldVal){
+                debug("oldValue",oldVal);
+                debug("newValue",newVal);
+                debug("scope",scope.ss);
+                var parseFun = $parse(newVal);
+                $scope.parseValue = parseFun(scope);
+                console.log($scope.parseValue);
+            }
+        });
+    });
+</script>
+</html>
