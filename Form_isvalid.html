@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/angular/1.2.13/angular.js"></script>
+    <title>Form_isvalid</title>
+    <style>
+        input .ng-invalid{
+            border: 1px solid red;
+        }
+        input .ng-vaild{
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<form ng-controller="FormController" name="signup_form">
+    <input ng-model="signup.name" ng-minlength="3" ng-maxlength="20" placeholder="name" name="name" required/>
+    <input ng-model="signuo.email" type="email" name="email">
+    <!--每种错误显示不同的错误信息-->
+    <small class="error" ng-show="signup_form.name.$dirty && signup_form.name.$error.required"/>Your name is required</small>
+    <small class="error" ng-show="signup_form.name.$dirty && signup_form.name.$error.minlength"/>Your name is required to be at least 3 characters</small>
+    <small class="error" ng-show="signup_form.name.$dirty && signup_form.name.$error.maxlength"/>Your name can't be longer than 20 characters</small>
+    <small class="error" ng-show="signup_form.email.$dirty && signup_form.email.$error.email">That is not a valid email.Please input a valid email.</small>
+    <!--如果表单是无效的那么submit按钮就是被disabled的-->
+    <button type="submit" ng-disabled="signup_form.$invalid">
+        Submit
+    </button>
+</form>
+
+</body>
+<script>
+    var app = angular.module('myApp',[])
+    app.controller("FormController",function ($scope) {
+
+    });
+</script>
+</html>

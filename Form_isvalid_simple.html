@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+</head>
+<body ng-app="myApp">
+<!--表单验证的简化版-->
+    <form ng-controller="FormController" novalidate name="signup_form">
+        <input name="name" ng-model="user.name" required ng-minlength="3" ng-maxlength="20">
+        <div class="error" ng-messages="signup_form.name.$error">
+            <div ng-message="required">sure you enter your name</div>
+            <div ng-message="minlength">The field must be at least 3 characters</div>
+        </div>
+    </form>
+</body>
+    <script>
+        var app = angular.module("myApp",['ngMessages']);
+        app.controller("FormController",function ($scope) {
+
+        });
+    </script>
+</html>
